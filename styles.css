@@ -1,0 +1,99 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.wrapper {
+    max-width: 40rem;
+    margin: auto;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
+    background-color: black;
+    color: white;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+nav {
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: silver;
+}
+
+nav ul {
+    display: flex;
+}
+nav li {
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+.controls {
+    width: calc(100% - 2rem);
+    margin: 1rem auto;
+    max-width: 20rem;
+
+}
+
+.code-buttons {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.code-buttons button {
+    margin-left: .25rem;
+    margin-right: .25rem;
+    background-color: black;
+    border: none;
+    color: white;
+    padding: .5rem 1rem .5rem 1rem;
+    border-radius: .2rem;
+}
+
+.controls input {
+    width: 100%;
+    height: 2rem;
+    padding: .5rem;
+}
+
+button[type="submit"] {
+    width: 100%;
+    height: 2.2rem;
+    padding-bottom: .1rem;
+    background-color: black;
+    border: none;
+    color: white;
+    border-radius: .2rem;
+}
+
+.generated-text {
+    width: calc(100% - 2rem);
+    margin: 1rem;
+    height: 20rem;
+    overflow: auto;
+    border: 1px solid grey;
+    padding: .5rem;
+}
+
+.generated-text p {
+    margin-bottom: 1rem;
+}
