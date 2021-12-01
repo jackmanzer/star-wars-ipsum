@@ -62,9 +62,9 @@ nav li {
 .code-buttons button {
     margin-left: .25rem;
     margin-right: .25rem;
-    background-color: black;
-    border: none;
-    color: white;
+    border: 1px solid black; 
+    background-color: white;
+    color: black;
     padding: .5rem 1rem .5rem 1rem;
     border-radius: .2rem;
 }
@@ -90,8 +90,12 @@ button[type="submit"] {
     margin: 1rem;
     height: 20rem;
     overflow: auto;
-    border: 1px solid grey;
-    padding: .5rem;
+    border: 1px solid black;
+    padding: 1rem;
+    border-radius: .25rem;
+    background-color: silver;
+    line-height: 1.25rem;
+    font-size: .875rem;
 }
 
 .generated-text p {
