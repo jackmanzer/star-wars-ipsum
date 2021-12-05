@@ -2,7 +2,9 @@
 const codeButtonsDiv = document.querySelector('.code-buttons');
 const generatedTextContainer = document.querySelector('.generated-text');
 const input = document.querySelector('#input');
-
+const form = document.querySelector('#form');
+const placeholder = document.querySelector('#placeholder');
+const loadingAnimation = document.querySelector('#loading');
 
 //GLOBAL VARIABLES
 let numberOfWords = 0;
@@ -141,15 +143,28 @@ const generateRandomSpecies = (data) => {
 };
 
 const writeIpsumString = (ipsumString) => {
+    placeholder.style.display = "none";
     generatedTextContainer.textContent = ipsumString;
 };
 
+const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if(/\D/.test(input.value)){
+        alert('please enter a number');
+    } else {
+        placeholder.querySelector('p').textContent = '';
+        loadingAnimation.style.display = 'block';
+        let inputValue = Number(input.value);
+        createDataObject().then((data) => generateIpsumString(data, inputValue));
+    }
+}
 
-// createDataObject().then((data) => generateIpsumString(data, numberOfWords));
+
 
 //check length
 
 //use to lowercase
 //event-listeners 
+form.addEventListener('submit', handleFormSubmit);
 codeButtonsDiv.addEventListener('click', changeButtonColor);
 input.addEventListener('input', updateNumberOfWords);
