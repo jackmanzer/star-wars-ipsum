@@ -1,5 +1,11 @@
 //dom queries
 const codeButtonsDiv = document.querySelector('.code-buttons');
+const generatedTextContainer = document.querySelector('.generated-text');
+const input = document.querySelector('#input');
+
+
+//GLOBAL VARIABLES
+let numberOfWords = 0;
 
 const codeButtons = codeButtonsDiv.children;
 
@@ -8,29 +14,21 @@ function changeButtonColor(e){
     console.log(e.target.tagName);
     if(e.target.tagName === 'BUTTON'){
         for(let i = 0; i < codeButtons.length; i++){
-            codeButtons[i].style.backgroundColor = 'white';
-            codeButtons[i].style.color = 'black';
+            codeButtons[i].style.backgroundColor = 'black';
+            codeButtons[i].style.color = 'white';
         }
-        e.target.style.backgroundColor = 'black';
-        e.target.style.color = 'white';
+        e.target.style.backgroundColor = 'white';
+        e.target.style.color = 'black';
     } 
 };
 
-// // Assignment Code
-// var generateBtn = document.querySelector("#generate");
-
-// // Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword);
 
 
-// // Write password to the #password input
-// function writePassword() {  
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
-//   passwordText.value = password;
-// }
-
-// let ipsumString = '';
+const updateNumberOfWords = () => {
+    numberOfWords = input.value;
+    console.log('hello');
+    console.log(numberOfWords);
+}
 
 const createDataObject = async () => {
     try {
@@ -50,24 +48,24 @@ const createDataObject = async () => {
             planets: planetsData.results.map((result) => result.name),
             species: speciesData.results.map((result) => result.name)
         }
-        console.log(data);
         return data;
     }
     catch(err) {
         console.log(err);
     };
 }
-createDataObject().then((data) => generateIpsumString(data));
+
+// generateIpsumString(data, 44)
 
 const generateIpsumString = (data, numberOfWords) => {
     
     let ipsumString = '';
 
-    let wordCount = 0;
+    let currentWordCount = 0;
 
-    while(wordCount < numberOfWords){
+    while(currentWordCount !== numberOfWords){
         //get random choice 
-        let randomSelectionNum = Math.floor(Math.random * 6);
+        let randomSelectionNum = Math.floor(Math.random() * 6);
         let randomArray = [ 
                 generateRandomPerson(data), 
                 generateRandomFilm(data),
@@ -76,17 +74,22 @@ const generateIpsumString = (data, numberOfWords) => {
                 generateRandomPlanet(data),
                 generateRandomSpecies(data)
             ]
+        console.log(randomArray);
         let randomChoice = randomArray[randomSelectionNum];
-        let prevStringWordCount = ipsumString.match(/(\w+)/g).length; 
-        let newString = ipsumString.concat(randomChoice);
-        let newStringWordCount = newString.match(/(\w+)/g).length; 
+        let newString = ipsumString.concat(' ' + randomChoice);
+        currentWordCount = newString.match(/(\w+)/g).length; 
 
-        if(newStringWordCount <= prevStringWordCount) {
+        if (currentWordCount < numberOfWords) {
             ipsumString = newString;
-        } else {
+        }
+        else if(currentWordCount === numberOfWords) {
+            ipsumString = newString.toLowerCase();
+            writeIpsumString(ipsumString);
+            return;
+        } else if(currentWordCount > numberOfWords){ 
+            currentWordCount = ipsumString.match(/(\w+)/g).length;   
         }
     }
-    console.log(ipsumString);
 };
 
 //generate a random person
@@ -94,6 +97,7 @@ const generateRandomPerson = (data) => {
     let randomNumber = Math.floor(Math.random() * 10);
     let randomPerson = data.people[randomNumber]; 
     console.log(randomPerson);
+    return randomPerson;
 };
 
 //generate a random film 
@@ -101,6 +105,7 @@ const generateRandomFilm = (data) => {
     let randomNumber = Math.floor(Math.random() * 6);
     let randomFilm = data.films[randomNumber]; 
     console.log(randomFilm);
+    return randomFilm;
 };
 
 //generate a random starship
@@ -108,6 +113,7 @@ const generateRandomStarship = (data) => {
     let randomNumber = Math.floor(Math.random() * 10);
     let randomStarship = data.starships[randomNumber]; 
     console.log(randomStarship);
+    return randomStarship;
 };
 
 //generate a random vehicle 
@@ -115,6 +121,7 @@ const generateRandomVehicle = (data) => {
     let randomNumber = Math.floor(Math.random() * 10);
     let randomVehicle = data.vehicles[randomNumber]; 
     console.log(randomVehicle);
+    return randomVehicle; 
 };
 
 //generate a random planet 
@@ -122,6 +129,7 @@ const generateRandomPlanet = (data) => {
     let randomNumber = Math.floor(Math.random() * 10);
     let randomPlanet = data.planets[randomNumber]; 
     console.log(randomPlanet);
+    return randomPlanet; 
 };
 
 //generate a random species 
@@ -129,10 +137,19 @@ const generateRandomSpecies = (data) => {
     let randomNumber = Math.floor(Math.random() * 10);
     let randomSpecies = data.species[randomNumber]; 
     console.log(randomSpecies);
+    return randomSpecies; 
 };
+
+const writeIpsumString = (ipsumString) => {
+    generatedTextContainer.textContent = ipsumString;
+};
+
+
+// createDataObject().then((data) => generateIpsumString(data, numberOfWords));
 
 //check length
 
 //use to lowercase
 //event-listeners 
 codeButtonsDiv.addEventListener('click', changeButtonColor);
+input.addEventListener('input', updateNumberOfWords);
