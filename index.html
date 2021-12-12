@@ -11,41 +11,70 @@
 </head>
 
 <body>
-    <header>
-        <div>
-            <img class="logo" src="img/star-wars-ipsum.png">
-            <p>The ipsum you've been looking for ...</p>
-        </div>
-    </header>
-    <!-- <nav>
-        <ul>
-            <li>About</li>
-            <li>API</li>
-        </ul>
-    </nav> -->
-    <main>
-        <div class="wrapper">
-            <form action="" class="controls" id="form">
-                <input type="text" placeholder="how many words?" id="input">
-                <div class="code-buttons"> 
-                    <button>&lt;p&gt;</button>
-                    <button>&lt;li&gt;</button>
-                    <button>&lt;div&gt;</button>
-                    <button>&lt;span&gt;</button>
-                </div>
-                <button type="submit">generate text</button>
-            </form>
-            <div class="generated-text">
-                <div id="placeholder" class="placeholder">
-                    <img src="./img/stormtrooper-helmet-icon.svg" alt="storm trooper helmet icon" class="storm-trooper-helmet-icon">
-                    <p>"Look, sir. Droids!"</p>
-                    <div id="loading" class="lds-facebook"><div></div><div></div><div></div></div>
-                </div>
+    <div class="sticky-footer-wrapper">
+        <header class="header">
+            <div class="header-copy-container">
+                <img class="logo" src="img/star-wars-ipsum.png">
+                <p>#The ipsum you've been looking for ...</p>
             </div>
-        </div>
-    </main>
-    <script src="index-test.js"></script>
-    <!-- <script src="index.js"></script> -->
+        </header>
+        <main class="main">
+            <div class="wrapper">
+                <div class="intro-material">
+                    <h2>Give Your Placeholder Text Some Galatic Flavor</h2>
+                    <p>Ahh. Back to the future. George, there's nothing to be scared of. All it takes is a little self
+                        confidence. You know, if you put your mind to it, you could accomplish anything. He's your
+                        brother,
+                        Mom. Don't tell me.</p>
+                    <!-- <hr class="intro-horizontal-rule"> -->
+                </div>
+                <form class="ipsum-form" id="ipsum-form" autocomplete="off">
+                    <div class="length-buttons-container" id="length-buttons-container">
+                        <button class="words-button" id="words-button">words</button>
+                        <button class="paragraphs-button" id="paragraphs-button">paragraphs</button>
+                    </div>
+                    <input class="ipsum-amount-control" type="text" placeholder="How many?" id="ipsum-amount-control"
+                        autocomplete="off">
+                    <div class="tag-buttons-container" id="tag-buttons-container">
+                        <button id="p-tag-button">&lt;p&gt;</button>
+                        <button id="li-tag-button">&lt;li&gt;</button>
+                        <button id="div-tag-button">&lt;div&gt;</button>
+                        <button id="span-tag-button">&lt;span&gt;</button>
+                        <button id="no-tag-button">none</button>
+                    </div>
+                    <button class="ipsum-form-submit-button" type="submit">For the Republic!</button>
+                </form>
+                <section class="generated-ipsum-section display-none" id="generated-ipsum-section">
+                    <div class="generated-ipsum-button-container display-none" id="generated-ipsum-button-container">
+                        <button class="back-button" id="back-button">Back</button>
+                        <div class="tooltip" id="tooltip">
+                            <button class="copy-ipsum-button" id="copy-ipsum-button">Copy</button>
+                            <span class="tooltiptext" id="tooltiptext">Copy to clipboard</span>
+                        </div>
+                    </div>
+                    <div class="generated-ipsum-container display-none" id="generated-ipsum-container">
+                    </div>
+                    <div id="loading-copy" class="loading-copy display-none">
+                        <div>
+                            <div id='loader'></div>
+                        </div>
+                        <p class="loading-copy_quote">"Patience you must have my young padawan" </p>
+                        <span class="loading-copy_quote_source">&#8211;Yoda</span>
+                        <!-- <img src="./img/stormtrooper-helmet-icon.svg" alt="storm trooper helmet icon" class="storm-trooper-helmet-icon"> -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>&copy; Jack Manzer 2021</p>
+         <p>view source code on my github</p>
+    </footer>  
+    <audio src="./assets/audio/pop.wav" id="form-button-audio"></audio>
+    <audio src="./assets/audio/tap-warm.wav" id="back-button-audio"></audio>
+    <audio src="./assets/audio/slide-scissors.wav" id="copy-button-audio"></audio>
+    <audio src="./assets/audio/space-shield-sounds.wav" id="form-submit-audio"></audio>
+    <script src="index.js"></script>
 </body>
 
 </html>

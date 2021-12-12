@@ -1,84 +1,174 @@
+
+/* table of contents
+
+1. global styles
+   1.1 media queries 
+
+2. header 
+
+3. intro material 
+
+4. ipsum form 
+   4.1 base styles
+   4.2 length-buttons 
+   4.3 tag buttons 
+   4.4 ipsum form change button color classes
+
+
+
+*/
+
+
+
+
+
+
+
+/*  ================
+    1. global styles 
+    ================ */
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+    margin: 0;
+}
+
 body {
     font-family: 'roboto', sans-serif;
     background-color: black;
     color: white;
+    background-image: url('img/page-background.jpg');
+    background-size: 100%;
+    height: 100%;
+}
+
+
+
+.sticky-footer-wrapper {
+    min-height: 100%;
 }
 
 .wrapper {
-    max-width: 40rem;
-    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
-header {
+@font-face {
+    font-family: 'Starjedi';
+    src: url('./assets/fonts/Starjedi.ttf');
+}
+
+@keyframes Pulse {
+    0%, 100% {
+      bottom: 0;
+    }
+    50% {
+      bottom: 2px;
+    }
+}
+
+/* 1.1 media queries */
+@media screen and (min-width: 480px) {
+    body {
+      background-size: 50%;
+      background-position-x: center;
+    }
+  }
+
+/*  ================
+    2. header 
+    ================ */
+
+.header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10rem;
-    /* height: 16rem; */
+    height: clamp(16rem, 11.7895rem + 16.8421vw, 20rem);
     background-image: url("./img/header-background.png");
     background-size: cover;
-    /* background-color: white; */
-    /* color: black; */
 }
 
-header p {
+.header-copy-container p {
     text-align: center;
-    margin-top: 1rem;
-    font-size: .75rem;
+    position: relative;
+    left: 0;
+    animation: Pulse 1.5s linear infinite;
+    margin-top: 3rem;
+    color: #02fefe;    
+    font-size: 1rem;
 }
+
 
 .logo {
-    margin-top: 2rem;
-    width: 18rem;
+    margin-top: 3rem;
+    width: clamp(22rem, 3.0526rem + 75.7895vw, 40rem);
 }
 
-nav {
-    height: 2rem;
+
+/*  =================
+    3. intro material
+    ================= */
+
+.intro-material {
+    padding-top: 4rem;
+    background-color: black;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
-nav ul {
-    display: flex;
+.intro-material h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-left: 1rem;
+    width: calc(100% - 2rem);
+    line-height: 125%;
+    max-width: 40rem;
+    font-family: 'Starjedi';
 }
 
-nav li {
-    margin-left: .5rem;
-    margin-right: .5rem;
+.intro-material p {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    width: calc(100% - 2rem);
+    line-height: 135%;
+    color: #3588CB;
+    max-width: 40rem;
 }
 
-.controls {
-    padding-top: 2rem;
+.intro-horizontal-rule {
+    margin-top: 3rem;
+    max-width: 44rem;
+    border: 0;
+    height: .1rem;
+    width: calc(100% - 3rem);
+    background-color: #3588CB;
+    opacity: 100%;
+}
+
+
+/*  =================
+    4 ipsum form 
+    ================= */
+
+/* 4.1 base styles */
+
+.ipsum-form {
+    padding-top: 4rem;
     width: calc(100% - 2rem);
     margin: 1rem auto;
-    max-width: 20rem;
+    max-width: 24rem;
+    padding-bottom: 8rem;
 }
 
-.code-buttons {
-    padding: 1rem;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.code-buttons button {
-    margin-left: .25rem;
-    margin-right: .25rem;
-    border: 1px solid white;
-    background-color: black;
-    color: white;
-    padding: .5rem 1rem .5rem 1rem;
-    border-radius: .2rem;
-}
-
-.controls input {
+.ipsum-amount-control {
     background-color: black;
     border: none;
     border: 1px solid white;
@@ -90,106 +180,593 @@ nav li {
     font-family: 'roboto';
 }
 
-.controls input:focus {
+.ipsum-amount-control:focus {
     outline: none;
     background-color: white;
     color: black;
 }
 
-.controls input::placeholder:focus {
-    color: black;
+.ipsum-amount-control::placeholder {
+    color: white;
 }
 
-button[type="submit"] {
+.ipsum-form-submit-button {
     width: 100%;
     height: 3rem;
     padding-bottom: .1rem;
-    background-color: black;
+    background-color: #FFD900;
+    color: black;
     border: none;
-    border: 1px solid white;
-    color: white;
+    font-weight: 500;
     border-radius: .2rem;
     font-family: 'roboto';
 }
-button[type="submit"]:focus {
+
+.ipsum-form-submit-button:hover {
+    background-color: #ffe764;
+    color: black;
+}
+
+/* 4.2 length buttons */
+
+.length-buttons-container {
+    margin-bottom: 1.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.length-buttons-container button {
+    width: 18rem;
+    border: 1px solid white;
+    padding: .5rem 1rem .5rem 1rem;
+}
+
+.words-button {
+    border-radius: .25rem 0 0 .25rem;
     background-color: white;
     color: black;
 }
 
-.generated-text {
-    width: calc(100% - 2rem);
-    margin: 1rem;
-    height: 20rem;
-    overflow: auto;
-    border: 1px solid white;
-    padding: 1rem;
-    border-radius: .25rem;
+.paragraphs-button {
+    border-radius: 0 .25rem .25rem 0;
     background-color: black;
-    line-height: 1.25rem;
-    font-size: .875rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    color: white;
 }
 
-.generated-text p {
+/* 4.3 tag buttons */
+
+.tag-buttons-container {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.tag-buttons-container button {
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    width: 4rem;
+    margin-right: .75rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    border-radius: .2rem;
+}
+
+#no-tag-button {
+    background-color: white;
+    color: black;
+}
+
+/* 4.4 ipsum form change button color classes*/
+
+.button-dark {
+    background-color: black;
+    color: white;
+}
+
+.button-light {
+    background-color: white;
+    color: black;
+}
+
+
+.generated-ipsum-section {
+    width: calc(100% - 2rem);
+    max-width: 38rem;
+    padding-bottom: 8rem;
+}
+
+
+
+.generated-ipsum-container {
+    /* margin-left: 1rem; */
+    margin-top: .875rem;
+    padding: 1.5rem;
+    padding-top: 2rem;
+    overflow: auto;
+    /* border: 1px solid white; */
+    /* padding: 4rem; */
+    border-radius: .25rem;
+    /* background-color: black; */
+    line-height: 1.25rem;
+    /* font-size: .875rem; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    /* background-color: blue; */
+    background-color:#091722;
+}
+
+.generated-ipsum-container p {
     margin-bottom: 1rem;
 }
 
-.placeholder {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.generated-ipsum-button-container {
+    margin-top: 4rem;
 }
 
-.placeholder p {
-    margin-top: 1rem;
+.copy-ipsum-button, .back-button {
+    border-radius: .25rem;
+    padding: .25rem .5rem .25rem .5rem;
+    background-color: black;
+    color: white;
+    border: none;
+    border: 1px solid white;
 }
+
+.copy-ipsum-button:hover, .back-button:hover {
+    background-color: white;
+    color: black;
+}
+
+.loading-copy {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: #94a3b8;
+    /* margin-left: 1rem; */
+    padding: 1.5rem;
+    padding-top: 2rem;
+    /* border: 1px solid white; */
+    /* padding: 4rem; */
+    border-radius: .25rem;
+    /* background-color: black; */
+    line-height: 1.25rem;
+    /* font-size: .875rem; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    /* background-color: blue; */
+    background-color:#091722;
+}
+.loading-copy_quote {
+    font-style: italic;
+    margin-top: 2rem;
+}
+.loading-copy_quote_source {
+    font-size: .875rem;
+}
+
 
 .storm-trooper-helmet-icon {
-    display: block;
+    position: relative;
+    
     width: 4rem;
+    animation: Pulse 1.5s linear infinite;
 }
 
-#loading {
-    margin-top: -1rem;
+
+
+.footer {
+    /* border-top: 1px solid 
+    #64748b; */
+    margin-top: -4rem;
+    height: 4rem;
+    /* background-color: black; */
+    color: white;
+    font-size: .75rem;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+#loader {
+    animation: spin 1s linear infinite;
+    height: 10px;
+    width: 10px;
+    transform: scale(.4);
+  }
+  
+  @keyframes spin {
+    0% {
+      box-shadow: 
+        0px -30px #94a3ba, 
+        10px -30px #94a3ba, 
+        20px -20px #94a3ba, 
+        30px -10px #94a3ba, 
+        30px 0px #94a3ba, 
+        30px 10px #94a3ba, 
+        20px 20px #94a3ba, 
+        10px 30px #94a3ba, 
+        0px 30px transparent, 
+        -10px 30px transparent, 
+        -20px 20px transparent, 
+        -30px 10px transparent, 
+        -30px 0px transparent, 
+        -30px -10px transparent, 
+        -20px -20px transparent,
+        -10px -30px transparent;
+    }
+    6.25% {
+      box-shadow: 
+        0px -30px transparent, 
+        10px -30px #94a3ba, 
+        20px -20px #94a3ba, 
+        30px -10px #94a3ba, 
+        30px 0px #94a3ba, 
+        30px 10px #94a3ba, 
+        20px 20px #94a3ba, 
+        10px 30px #94a3ba, 
+        0px 30px #94a3ba, 
+        -10px 30px transparent, 
+        -20px 20px transparent, 
+        -30px 10px transparent, 
+        -30px 0px transparent, 
+        -30px -10px transparent, 
+        -20px -20px transparent,
+        -10px -30px transparent;
+    }
+    12.5% {
+      box-shadow: 
+        0px -30px transparent, 
+        10px -30px transparent, 
+        20px -20px #94a3ba, 
+        30px -10px #94a3ba, 
+        30px 0px #94a3ba, 
+        30px 10px #94a3ba, 
+        20px 20px #94a3ba, 
+        10px 30px #94a3ba, 
+        0px 30px #94a3ba, 
+        -10px 30px #94a3ba, 
+        -20px 20px transparent, 
+        -30px 10px transparent, 
+        -30px 0px transparent, 
+        -30px -10px transparent, 
+        -20px -20px transparent,
+        -10px -30px transparent;
+    }
+    18.75% {
+      box-shadow: 
+        0px -30px transparent, 
+        10px -30px transparent, 
+        20px -20px transparent, 
+        30px -10px #94a3ba, 
+        30px 0px #94a3ba, 
+        30px 10px #94a3ba, 
+        20px 20px #94a3ba, 
+        10px 30px #94a3ba, 
+        0px 30px #94a3ba, 
+        -10px 30px #94a3ba, 
+        -20px 20px #94a3ba, 
+        -30px 10px transparent, 
+        -30px 0px transparent, 
+        -30px -10px transparent, 
+        -20px -20px transparent,
+        -10px -30px transparent;
+    }
+    25% {
+      box-shadow: 
+        0px -30px transparent, 
+        10px -30px transparent, 
+        20px -20px transparent, 
+        30px -10px transparent, 
+        30px 0px #94a3ba, 
+        30px 10px #94a3ba, 
+        20px 20px #94a3ba, 
+        10px 30px #94a3ba, 
+        0px 30px #94a3ba, 
+        -10px 30px #94a3ba, 
+        -20px 20px #94a3ba, 
+        -30px 10px #94a3ba, 
+        -30px 0px transparent, 
+        -30px -10px transparent, 
+        -20px -20px transparent,
+        -10px -30px transparent;
+    }
+    31.25% {
+      box-shadow: 
+        0px -30px transparent, 
+        10px -30px transparent, 
+        20px -20px transparent, 
+        30px -10px transparent, 
+        30px 0px transparent, 
+        30px 10px #94a3ba, 
+        20px 20px #94a3ba, 
+        10px 30px #94a3ba, 
+        0px 30px #94a3ba, 
+        -10px 30px #94a3ba, 
+        -20px 20px #94a3ba, 
+        -30px 10px #94a3ba, 
+        -30px 0px #94a3ba, 
+        -30px -10px transparent, 
+        -20px -20px transparent,
+        -10px -30px transparent;
+    }
+    37.5% {
+      box-shadow: 
+        0px -30px transparent, 
+        10px -30px transparent, 
+        20px -20px transparent, 
+        30px -10px transparent, 
+        30px 0px transparent, 
+        30px 10px transparent, 
+        20px 20px #94a3ba, 
+        10px 30px #94a3ba, 
+        0px 30px #94a3ba, 
+        -10px 30px #94a3ba, 
+        -20px 20px #94a3ba, 
+        -30px 10px #94a3ba, 
+        -30px 0px #94a3ba, 
+        -30px -10px #94a3ba, 
+        -20px -20px transparent,
+        -10px -30px transparent;
+    }
+    43.75% {
+      box-shadow: 
+        0px -30px transparent, 
+        10px -30px transparent, 
+        20px -20px transparent, 
+        30px -10px transparent, 
+        30px 0px transparent, 
+        30px 10px transparent, 
+        20px 20px transparent, 
+        10px 30px #94a3ba, 
+        0px 30px #94a3ba, 
+        -10px 30px #94a3ba, 
+        -20px 20px #94a3ba, 
+        -30px 10px #94a3ba, 
+        -30px 0px #94a3ba, 
+        -30px -10px #94a3ba, 
+        -20px -20px #94a3ba,
+        -10px -30px transparent;
+    }
+    50% {
+      box-shadow: 
+        0px -30px transparent, 
+        10px -30px transparent, 
+        20px -20px transparent, 
+        30px -10px transparent, 
+        30px 0px transparent, 
+        30px 10px transparent, 
+        20px 20px transparent, 
+        10px 30px transparent, 
+        0px 30px #94a3ba, 
+        -10px 30px #94a3ba, 
+        -20px 20px #94a3ba, 
+        -30px 10px #94a3ba, 
+        -30px 0px #94a3ba, 
+        -30px -10px #94a3ba, 
+        -20px -20px #94a3ba,
+        -10px -30px #94a3ba;
+    }
+    56.25% {
+      box-shadow: 
+        0px -30px #94a3ba, 
+        10px -30px transparent, 
+        20px -20px transparent, 
+        30px -10px transparent, 
+        30px 0px transparent, 
+        30px 10px transparent, 
+        20px 20px transparent, 
+        10px 30px transparent, 
+        0px 30px transparent, 
+        -10px 30px #94a3ba, 
+        -20px 20px #94a3ba, 
+        -30px 10px #94a3ba, 
+        -30px 0px #94a3ba, 
+        -30px -10px #94a3ba, 
+        -20px -20px #94a3ba,
+        -10px -30px #94a3ba;
+    }
+    62.5% {
+      box-shadow: 
+        0px -30px #94a3ba, 
+        10px -30px #94a3ba, 
+        20px -20px transparent, 
+        30px -10px transparent, 
+        30px 0px transparent, 
+        30px 10px transparent, 
+        20px 20px transparent, 
+        10px 30px transparent, 
+        0px 30px transparent, 
+        -10px 30px transparent, 
+        -20px 20px #94a3ba, 
+        -30px 10px #94a3ba, 
+        -30px 0px #94a3ba, 
+        -30px -10px #94a3ba, 
+        -20px -20px #94a3ba,
+        -10px -30px #94a3ba;
+    }
+    68.75% {
+      box-shadow: 
+        0px -30px #94a3ba, 
+        10px -30px #94a3ba, 
+        20px -20px #94a3ba, 
+        30px -10px transparent, 
+        30px 0px transparent, 
+        30px 10px transparent, 
+        20px 20px transparent, 
+        10px 30px transparent, 
+        0px 30px transparent, 
+        -10px 30px transparent, 
+        -20px 20px transparent, 
+        -30px 10px #94a3ba, 
+        -30px 0px #94a3ba, 
+        -30px -10px #94a3ba, 
+        -20px -20px #94a3ba,
+        -10px -30px #94a3ba;
+    }
+    75% {
+      box-shadow: 
+        0px -30px #94a3ba, 
+        10px -30px #94a3ba, 
+        20px -20px #94a3ba, 
+        30px -10px #94a3ba, 
+        30px 0px transparent, 
+        30px 10px transparent, 
+        20px 20px transparent, 
+        10px 30px transparent, 
+        0px 30px transparent, 
+        -10px 30px transparent, 
+        -20px 20px transparent, 
+        -30px 10px transparent, 
+        -30px 0px #94a3ba, 
+        -30px -10px #94a3ba, 
+        -20px -20px #94a3ba,
+        -10px -30px #94a3ba;
+    }
+    81.25% {
+      box-shadow: 
+        0px -30px #94a3ba, 
+        10px -30px #94a3ba, 
+        20px -20px #94a3ba, 
+        30px -10px #94a3ba, 
+        30px 0px #94a3ba, 
+        30px 10px transparent, 
+        20px 20px transparent, 
+        10px 30px transparent, 
+        0px 30px transparent, 
+        -10px 30px transparent, 
+        -20px 20px transparent, 
+        -30px 10px transparent, 
+        -30px 0px transparent, 
+        -30px -10px #94a3ba, 
+        -20px -20px #94a3ba,
+        -10px -30px #94a3ba;
+    }
+    87.5% {
+      box-shadow: 
+        0px -30px #94a3ba, 
+        10px -30px #94a3ba, 
+        20px -20px #94a3ba, 
+        30px -10px #94a3ba, 
+        30px 0px #94a3ba, 
+        30px 10px #94a3ba, 
+        20px 20px transparent, 
+        10px 30px transparent, 
+        0px 30px transparent, 
+        -10px 30px transparent, 
+        -20px 20px transparent, 
+        -30px 10px transparent, 
+        -30px 0px transparent, 
+        -30px -10px transparent, 
+        -20px -20px #94a3ba,
+        -10px -30px #94a3ba;
+    }
+    93.75% {
+      box-shadow: 
+        0px -30px #94a3ba, 
+        10px -30px #94a3ba, 
+        20px -20px #94a3ba, 
+        30px -10px #94a3ba, 
+        30px 0px #94a3ba, 
+        30px 10px #94a3ba, 
+        20px 20px #94a3ba, 
+        10px 30px transparent, 
+        0px 30px transparent, 
+        -10px 30px transparent, 
+        -20px 20px transparent, 
+        -30px 10px transparent, 
+        -30px 0px transparent, 
+        -30px -10px transparent, 
+        -20px -20px transparent,
+        -10px -30px #94a3ba;
+    }
+    100% {
+      box-shadow: 
+        0px -30px #94a3ba, 
+        10px -30px #94a3ba, 
+        20px -20px #94a3ba, 
+        30px -10px #94a3ba, 
+        30px 0px #94a3ba, 
+        30px 10px #94a3ba, 
+        20px 20px #94a3ba, 
+        10px 30px #94a3ba, 
+        0px 30px transparent, 
+        -10px 30px transparent, 
+        -20px 20px transparent, 
+        -30px 10px transparent, 
+        -30px 0px transparent, 
+        -30px -10px transparent, 
+        -20px -20px transparent,
+        -10px -30px transparent;
+    }
+  }
+  
+  
+/*utility classes*/
+
+.display-none {
     display: none;
 }
 
-.lds-facebook {
-    display: inline-block;
+.display-block {
+    display: block;
+}
+  
+/* Tooltip container */
+.tooltip {
     position: relative;
-    width: 80px;
-    height: 80px;
-  }
-  .lds-facebook div {
     display: inline-block;
+    color:white;
+  }
+  
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    font-family: 'roboto';
+    visibility: hidden;
+    width: 8.75rem;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 12px 0px 8px 0px;
+    border-radius: 6px;
     position: absolute;
-    left: 8px;
-    width: 16px;
-    background: #fff;
-    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+    z-index: 1;
+    bottom: 125%;
+    left: 30%;
+    margin-left: -60px;
+    text-transform: none;
+  
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
   }
-  .lds-facebook div:nth-child(1) {
-    left: 8px;
-    animation-delay: -0.24s;
+  
+  /* Tooltip arrow */
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
   }
-  .lds-facebook div:nth-child(2) {
-    left: 32px;
-    animation-delay: -0.12s;
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
   }
-  .lds-facebook div:nth-child(3) {
-    left: 56px;
-    animation-delay: 0;
-  }
-  @keyframes lds-facebook {
-    0% {
-      top: 8px;
-      height: 64px;
-    }
-    50%, 100% {
-      top: 24px;
-      height: 32px;
-    }
+
+  .tooltip-clicked {
+      width: 4.5rem !important;
+      left: 100% !important
   }
