@@ -2,9 +2,6 @@
 const lengthButtonsContainer = document.querySelector('#length-buttons-container');
 const lengthButtons = lengthButtonsContainer.children;
 
-const tagButtonsContainer = document.querySelector('#tag-buttons-container');
-const tagButtons = tagButtonsContainer.children;
-
 const IpsumAmountControl = document.querySelector('#ipsum-amount-control');
 const IpsumForm = document.querySelector('#ipsum-form');
 
@@ -24,9 +21,18 @@ const formSubmitAudio = document.querySelector('#form-submit-audio');
 const copyButtonAudio = document.querySelector('#copy-button-audio');
 const backButtonAudio = document.querySelector('#back-button-audio');
 
-console.log(copyButtonAudio)
+
+const tagButtonsContainer = document.querySelector('#tag-buttons-container');
+const tagButtons = tagButtonsContainer.children;
+const pTagButton = document.querySelector('#p-tag-button');
+const liTagButton = document.querySelector('#li-tag-button');
+const divTagButton = document.querySelector('#div-tag-button');
+const spanTagButton = document.querySelector('#span-tag-button');
+const noTagButton = document.querySelector('#no-tag-button');
+
 //GLOBAL VARIABLES
 let numberOfWords = 0;
+let tagButtonValue = '';
 
 
 
@@ -165,17 +171,19 @@ const handleFormSubmit = (e) => {
     formSubmitAudio.play();
     if(/\D/.test(IpsumAmountControl.value)){
         alert('please enter a number');
+        IpsumAmountControl.value = '';
     } else {
+        let IpsumAmountControlValue = Number(IpsumAmountControl.value);
         IpsumForm.classList.add('display-none');
         generatedIpsumSection.classList.remove('display-none');
         loadingCopy.classList.remove('display-none');
-        setTimeout(() => {
-            loadingCopy.classList.add('display-none');
-            generatedIpsumButtonContainer.classList.remove('display-none');
-            generatedIpsumContainer.classList.remove('display-none');
-        }, 3000);
-        let IpsumAmountControlValue = Number(IpsumAmountControl.value);
-        createDataObject().then((data) => generateIpsumString(data, IpsumAmountControlValue));
+        createDataObject()
+            .then((data) => generateIpsumString(data, IpsumAmountControlValue))
+            .then(() => {
+                loadingCopy.classList.add('display-none');
+                generatedIpsumButtonContainer.classList.remove('display-none');
+                generatedIpsumContainer.classList.remove('display-none');
+            })        
     }
 }
 
@@ -184,7 +192,8 @@ const resetApp = () => {
     generatedIpsumButtonContainer.classList.add('display-none');
     generatedIpsumContainer.classList.add('display-none');
     IpsumForm.classList.remove('display-none');
-}
+};
+
 
 const copyIpsumToClipboard = () => {
   
@@ -200,12 +209,13 @@ const copyIpsumToClipboard = () => {
     // tooltip.classList.remove('tooltip-clicked')
     tooltipText.classList.remove('tooltip-clicked')
   }, 900);
-
 };
 
-
-
-
+const getTag = (tagButtons) => {
+    const activeButton = tagButtons.filter(button => button.classList.contains('active'));
+    const tagString = activeButton.textContent;
+    return tagString;
+}
 
 IpsumForm.addEventListener('submit', handleFormSubmit);
 lengthButtonsContainer.addEventListener('click', (e) => changeButtonColor(e,lengthButtons));

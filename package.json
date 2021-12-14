@@ -1,0 +1,24 @@
+{
+  "name": "starwars-ipsum",
+  "version": "1.0.0",
+  "description": "an app for generating starwars placeholder text",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackmanzer/starwars-ipsum.git"
+  },
+  "author": "Jack Manzer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackmanzer/starwars-ipsum/issues"
+  },
+  "homepage": "https://github.com/jackmanzer/starwars-ipsum#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.1.1"
+  }
+}
