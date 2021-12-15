@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/workout',
+  process.env.MONGODB_URI || 'mongodb://localhost/starwars-ipsum',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -21,6 +21,7 @@ mongoose.connect(
 mongoose.connection.on('connected', () => {
   console.log('Mongoose is connected!!!!');
 });
+
 
 // routes
 app.use(require("./routes"));
