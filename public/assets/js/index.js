@@ -77,9 +77,9 @@ const createDataObject = async () => {
     };
 }
 
-const generateIpsumString = (data, numberOfWords) => {
+const generateIpsumString = async (numberOfWords) => {
 
-    createDataObject();
+    const data = await createDataObject();
     
     let ipsumString = '';
 
@@ -113,11 +113,13 @@ const generateIpsumString = (data, numberOfWords) => {
     }
 };
 
-const generateIpsumSentence = () => {
-
+const generateIpsumSentence = async (numberOfWords) => {
+    const ipsumString = await generateIpsumString(numberOfWords);
+    const ipsumSentence = convertIpsumStringtoSentence(ipsumString); 
+    return ipsumSentence; 
 };
 
-const generateIpsumParagraphs = (numberOfParagraphs) => {
+const generateIpsumParagraphs = async (numberOfParagraphs) => {
     const shortParagraph = createShortParagraph(data);
     const mediumParagraph = createShortParagraph(data);
     const longParagraphWord = createLongParagraph(data);
@@ -270,8 +272,8 @@ const generateRandomWeapon = (data) => {
 
 
 
-const writeIpsumString = (ipsumString) => {
-    generatedIpsumContainer.textContent = ipsumString;
+const writeIpsumToDOM = (generatedIpsum) => {
+    generatedIpsumContainer.textContent = generatedIpsum;
 };
 
 const handleFormSubmit = (e) => {
@@ -283,33 +285,35 @@ const handleFormSubmit = (e) => {
         alert('please enter a number');
         IpsumAmountControl.value = '';
     } else {
-    //store input value 
-    const IpsumAmountControlValue = Number(IpsumAmountControl.value); 
-    //initiate loading state 
-        IpsumForm.classList.add('display-none');
-        generatedIpsumSection.classList.remove('display-none');
-        loadingCopy.classList.remove('display-none');
-    //check length button selection 
-    if(wordsButton.classList.contains('button_active')){
-        //create sentence 
-        createIpsumSentence(IpsumAmountControlValue);
-    } else if(paragraphButton.classList.contains('button_active')) {
-        //create paragraphs 
-        createIpsumParagraphs(IpsumAmountControlValue);
-    }  
-
-
-
-    // createDataObject()
-    //         .then((data) => generateIpsumString(data, IpsumAmountControlValue))
-    //         .then(() => {
-    //             loadingCopy.classList.add('display-none');
-    //             generatedIpsumButtonContainer.classList.remove('display-none');
-    //             generatedIpsumContainer.classList.remove('display-none');
-    //         })   
-
-      
+        //store input value 
+        const IpsumAmountControlValue = Number(IpsumAmountControl.value); 
+        //initiate loading state 
+            intiateLoadingState();
+        //check length button selection 
+        if(wordsButton.classList.contains('button_active')){
+            //generate sentence 
+            generateIpsumSentence(IpsumAmountControlValue)
+                .then((ipsumSentence) => writeIpsumToDOM(ipsumSentence))
+                .then(() => endLoadingState());
+        } else if(paragraphButton.classList.contains('button_active')) {
+            //generate paragraphs 
+            generateIpsumParagraphs(IpsumAmountControlValue)
+                .then((ipsumParagraphs) => writeIpsumToDOM(ipsumParagraphs))
+                .then(() => endLoadingState());
+        }       
     }
+}
+
+const intiateLoadingState = () => {
+    IpsumForm.classList.add('display-none');
+    generatedIpsumSection.classList.remove('display-none');
+    loadingCopy.classList.remove('display-none');
+}
+
+const endLoadingState = () => {
+    loadingCopy.classList.add('display-none');
+    generatedIpsumButtonContainer.classList.remove('display-none');
+    generatedIpsumContainer.classList.remove('display-none');
 }
 
 const resetApp = () => {
