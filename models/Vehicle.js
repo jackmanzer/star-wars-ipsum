@@ -1,18 +1,13 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require("mongoose");
 
-// Schema to create a course model
-const vehicle = new Schema(
-  {
-    name: {
-      type: String,
-    },
+const Schema = mongoose.Schema;
+
+const vehicleSchema = new Schema({
+  name: {
+    type: String,
   }
-);
+});
 
-const ship = model('course', courseSchema);
+const Vehicle = mongoose.model("Vehicle", vehicleSchema);
 
-module.exports = Course;
-
-
-
-
+module.exports = Vehicle;
