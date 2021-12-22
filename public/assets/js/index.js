@@ -1,3 +1,5 @@
+
+
 //dom queries
 const lengthButtonsContainer = document.querySelector('#length-buttons-container');
 const lengthButtons = lengthButtonsContainer.children;
@@ -40,28 +42,28 @@ let tagButtonValue = '';
 
 
 //DOM STYLING 
-function changeButtonColor(e, buttons){  
+function changeButtonColor(e, buttons) {
     e.preventDefault();
-    if(e.target.tagName === 'BUTTON'){
-        for(let i = 0; i < buttons.length; i++){
+    if (e.target.tagName === 'BUTTON') {
+        for (let i = 0; i < buttons.length; i++) {
             buttons[i].classList.remove('button_active');
             buttons[i].classList.add('button_inactive');
         }
         e.target.classList.remove('button_inactive');
         e.target.classList.add('button_active');
         formButtonAudio.play();
-    } 
+    }
 };
 
 //FETCH DATA FROM BACKEND 
 const createDataObject = async () => {
     try {
         let [characterData, planetsData, speciesData, vehiclesData, weaponsData] = await Promise.all([
-          fetch("/characters").then((res) => res.json()),
-          fetch("/planets").then((res) => res.json()),
-          fetch("/species").then((res) => res.json()),
-          fetch("/vehicles").then((res) => res.json()),
-          fetch("/weapons").then((res) => res.json()),
+            fetch("/characters").then((res) => res.json()),
+            fetch("/planets").then((res) => res.json()),
+            fetch("/species").then((res) => res.json()),
+            fetch("/vehicles").then((res) => res.json()),
+            fetch("/weapons").then((res) => res.json()),
         ]);
         const data = await {
             characters: characterData.map((result) => result.name),
@@ -72,7 +74,7 @@ const createDataObject = async () => {
         }
         return data;
     }
-    catch(err) {
+    catch (err) {
         console.log(err);
     };
 }
@@ -80,72 +82,94 @@ const createDataObject = async () => {
 const generateIpsumString = async (numberOfWords) => {
 
     const data = await createDataObject();
-    
+
     let ipsumString = '';
 
     let currentWordCount = 0;
 
-    while(currentWordCount !== numberOfWords){
+    while (currentWordCount !== numberOfWords) {
         //get random choice 
         let randomSelectionNum = Math.floor(Math.random() * 5);
-        let randomArray = [ 
-                generateRandomCharacter(data), 
-                generateRandomWeapon(data),
-                generateRandomVehicle(data),
-                generateRandomPlanet(data),
-                generateRandomSpecies(data)
-            ]
-        console.log(randomArray);
+        let randomArray = [
+            generateRandomCharacter(data),
+            generateRandomWeapon(data),
+            generateRandomVehicle(data),
+            generateRandomPlanet(data),
+            generateRandomSpecies(data)
+        ]
         let randomChoice = randomArray[randomSelectionNum];
         let newString = ipsumString.concat(' ' + randomChoice);
-        currentWordCount = newString.match(/(\w+)/g).length; 
+        currentWordCount = newString.match(/(\w+)/g).length;
 
         if (currentWordCount < numberOfWords) {
             ipsumString = newString;
         }
-        else if(currentWordCount === numberOfWords) {
+        else if (currentWordCount === numberOfWords) {
             ipsumString = newString;
-            // writeIpsumString(IpsumStringConvertedToSentence);
             return ipsumString;
-        } else if(currentWordCount > numberOfWords){ 
-            currentWordCount = ipsumString.match(/(\w+)/g).length;   
+        } else if (currentWordCount > numberOfWords) {
+            currentWordCount = ipsumString.match(/(\w+)/g).length;
         }
     }
 };
 
 const generateIpsumSentence = async (numberOfWords) => {
     const ipsumString = await generateIpsumString(numberOfWords);
-    const ipsumSentence = convertIpsumStringtoSentence(ipsumString); 
-    return ipsumSentence; 
+    const ipsumSentence = convertIpsumStringtoSentence(ipsumString);
+    const ipsumSentenceWithTags = addTagToIpsumString(ipsumSentence);
+    return ipsumSentenceWithTags;
 };
 
 const generateIpsumParagraphs = async (numberOfParagraphs) => {
-    const shortParagraph = createShortParagraph(data);
-    const mediumParagraph = createShortParagraph(data);
-    const longParagraphWord = createLongParagraph(data);
+
+    let generatedIpsum = '';
+
+    for (let i = 0; i < numberOfParagraphs; i++) {
+
+        const randomSelectionNum = Math.floor(Math.random() * 3);
+        let generatedParagraph = ''
+
+        if (randomSelectionNum === 1) {
+            generatedParagraph = await createShortParagraph()
+        } else if (randomSelectionNum === 2) {
+            generatedParagraph = await createMediumParagraph()
+        } else {
+            generatedParagraph = await createLongParagraph()
+        }
+        //add tags 
+        const paragraphWithTags = addTagToIpsumString(generatedParagraph);
+        generatedIpsum += paragraphWithTags.concat('\r\n\r\n');
+    
+        // generatedIpsumContainer.textContent.trim();
+    
+        // const paragraphElement = document.createElement('p');
+        // paragraphElement.textContent = generatedParagraph;
+        // generatedIpsumContainer.appendChild(paragraphElement);
+    };
+    generatedIpsumContainer.textContent = generatedIpsum.trim();
 };
 
 const convertIpsumStringtoSentence = (ipsumString) => {
     const trimmedString = ipsumString.trim();
-    const capitalizedString = capitalizeAString(trimmedString);
+    const lowercasedString = trimmedString.toLowerCase();
+    const capitalizedString = capitalizeAString(lowercasedString);
     const IpsumStringConvertedToSentence = capitalizedString + '.';
     return IpsumStringConvertedToSentence;
 };
 
-const createShortParagraph = (data) => {
-    // const shortParagraphText = generateIpsumString(data, 30);
+const createShortParagraph = async () => {
+    const shortParagraphText = await generateIpsumString(30);
     const shortParagraph = convertIpsumStringtoSentence(shortParagraphText);
-    return shortParagraph; 
+    return shortParagraph;
 }
 
-const createMediumParagraph = (data) => {
+const createMediumParagraph = async (data) => {
     let mediumParagraph = '';
-    // const mediumParagraphText = generateIpsumString(data, 60);
-    const mediumParagraphText = 
-    'Slave 1 rodians hoth disruptor kamino thermal detonator mirialans Han solo y-wing bb-8 endor alderaan boba fett mustafar pulse cannon hoth princess leia darth vader thermal detonator Ewok boba fett neimoidians seismic charge rodians coruscant mustafar ion blaster millennium falcon alderaan alderaan Coruscant princess leia disruptor pulse cannon imperial shuttle pulse cannon gungan millennium falcon endor r2-d2';
-    const stringArray = mediumParagraphText.split(' ');
+    const generatedIpsum = await generateIpsumString(60);
+    const lowercasedIpsum = generatedIpsum.toLowerCase();
+    const stringArray = lowercasedIpsum.split(' ');
     //add punctuation and capitalization
-    stringArray[0] = capitalizeAString(stringArray[0]);
+    stringArray[1] = capitalizeAString(stringArray[1]);
     stringArray.splice(9, 0, '.');
     stringArray[10] = capitalizeAString(stringArray[10]);
     stringArray.splice(17, 0, ',');
@@ -157,25 +181,25 @@ const createMediumParagraph = (data) => {
     stringArray[53] = capitalizeAString(stringArray[53]);
     stringArray.push('.');
     //add spaces 
-    for(element in stringArray) {
-       if(stringArray[element] == '.' || stringArray[element] == ',') {
-            mediumParagraph += stringArray[element]; 
-       } else {
-            mediumParagraph += ' ' + stringArray[element]; 
-       }
+    for (element in stringArray) {
+        if (stringArray[element] == '.' || stringArray[element] == ',') {
+            mediumParagraph += stringArray[element];
+        } else {
+            mediumParagraph += ' ' + stringArray[element];
+        }
     };
     //trim space off the front 
     const trimmedParagraph = mediumParagraph.trim();
-    return trimmedParagraph; 
+    return trimmedParagraph;
 };
 
-const createLongParagraph = (data) => {
+const createLongParagraph = async (data) => {
     let longParagraph = '';
-    const longParagraphText = 
-    `mustafar rodians rodians hoth sandcrawler pulse cannon seismic charge millennium falcon alderaan princess leia bowcaster endor y-wing zeltrons mustafar chewbacca naboo rodians endor gungan lightsaber Hoth star destroyer gungan kamino neimoidians iktochi twi'lek tatooine zeltrons luke skywalker thermal detonator boba fett neimoidians ion blaster jawa jawa pulse cannon bespin sandcrawler naboo millennium falcon tatooine bb-8 hoth r2-d2 jawa slugthrower jawa keshiri ion blaster star destroyer coruscant hoth boba fett slugthrower han solo bespin gungan gungan gungan hoth alderaan imperial shuttle thermal detonator luke skywalker boba fett slave 1 millennium falcon hoth hoth imperial shuttle tatooine blaster`
-    const stringArray = longParagraphText.split(' ');
+    const generatedIpsum = await generateIpsumString(100);
+    const lowercasedIpsum = generatedIpsum.toLowerCase();
+    const stringArray = lowercasedIpsum.split(' ');
     //add punctuation and capitalization
-    stringArray[0] = capitalizeAString(stringArray[0]);
+    stringArray[1] = capitalizeAString(stringArray[1]);
     stringArray.splice(19, 0, ',');
     stringArray.splice(27, 0, '.');
     stringArray[28] = capitalizeAString(stringArray[28]);
@@ -194,21 +218,21 @@ const createLongParagraph = (data) => {
     stringArray.splice(90, 0, '.');
     stringArray[91] = capitalizeAString(stringArray[91]);
     stringArray.push('.');
-    for(element in stringArray) {
-        if(stringArray[element] == '.' || stringArray[element] == ',') {
-             longParagraph += stringArray[element]; 
+    for (element in stringArray) {
+        if (stringArray[element] == '.' || stringArray[element] == ',') {
+            longParagraph += stringArray[element];
         } else {
-             longParagraph += ' ' + stringArray[element]; 
+            longParagraph += ' ' + stringArray[element];
         }
-     };
-     //trim space off the front 
-     const trimmedParagraph = longParagraph.trim();
-     return trimmedParagraph;
+    };
+    //trim space off the front 
+    const trimmedParagraph = longParagraph.trim();
+    return trimmedParagraph;
 };
 
 
 
-function capitalizeAString(word){
+function capitalizeAString(word) {
     const capitalizedFirstLetter = word.charAt(0).toUpperCase();
     const stringRemainder = word.slice(1);
     const capitalizedWord = capitalizedFirstLetter + stringRemainder;
@@ -232,75 +256,88 @@ function capitalizeAString(word){
 //medium is 60 words.
 //long is 100 words. 
 
+//controls textareaautosize 
 
 
 //generate a random person
 const generateRandomCharacter = (data) => {
     let randomNumber = Math.floor(Math.random() * 10);
-    let randomChararacter = data.characters[randomNumber]; 
+    let randomChararacter = data.characters[randomNumber];
     return randomChararacter;
 };
 
 //generate a random planet 
 const generateRandomPlanet = (data) => {
     let randomNumber = Math.floor(Math.random() * 10);
-    let randomPlanet = data.planets[randomNumber]; 
-    return randomPlanet; 
+    let randomPlanet = data.planets[randomNumber];
+    return randomPlanet;
 };
 
 //generate a random species 
 const generateRandomSpecies = (data) => {
     let randomNumber = Math.floor(Math.random() * 10);
-    let randomSpecies = data.species[randomNumber]; 
-    return randomSpecies; 
+    let randomSpecies = data.species[randomNumber];
+    return randomSpecies;
 };
 
 //generate a random vehicle 
 const generateRandomVehicle = (data) => {
     let randomNumber = Math.floor(Math.random() * 10);
-    let randomVehicle = data.vehicles[randomNumber]; 
-    return randomVehicle; 
+    let randomVehicle = data.vehicles[randomNumber];
+    return randomVehicle;
 };
 
 //generate a random vehicle 
 const generateRandomWeapon = (data) => {
     let randomNumber = Math.floor(Math.random() * 10);
-    let randomWeapon = data.weapons[randomNumber]; 
-    return randomWeapon; 
+    let randomWeapon = data.weapons[randomNumber];
+    return randomWeapon;
 };
-
-
-
 
 const writeIpsumToDOM = (generatedIpsum) => {
     generatedIpsumContainer.textContent = generatedIpsum;
 };
+
+const addTagToIpsumString = (ipsumString) => {
+    const activeButton = tagButtonsContainer.querySelector('.button_active').textContent;
+    console.log(activeButton);
+    if(activeButton === '<p>'){
+        ipsumString = `<p>${ipsumString}</p>`
+    } else if(activeButton === '<li>'){
+        ipsumString =`<li>${ipsumString}</li>`
+    } else if(activeButton === '<div>'){
+        ipsumString = `<div>${ipsumString}</div>`
+    } else if(activeButton === '<span>'){
+        ipsumString = `<span>${ipsumString}</span>`
+    } else {
+    }
+    return ipsumString;
+}
 
 const handleFormSubmit = (e) => {
     e.preventDefault();
     //play form submission sound
     formSubmitAudio.play();
     //validate IpsumAmountControl Input 
-    if(/\D/.test(IpsumAmountControl.value)){
+    if (/\D/.test(IpsumAmountControl.value)) {
         alert('please enter a number');
         IpsumAmountControl.value = '';
     } else {
         //store input value 
-        const IpsumAmountControlValue = Number(IpsumAmountControl.value); 
+        const IpsumAmountControlValue = Number(IpsumAmountControl.value);
         //initiate loading state 
-            intiateLoadingState();
+        intiateLoadingState();
         //check length button selection 
-        if(wordsButton.classList.contains('button_active')){
+        if (wordsButton.classList.contains('button_active')) {
             //generate sentence 
             generateIpsumSentence(IpsumAmountControlValue)
                 .then((ipsumSentence) => writeIpsumToDOM(ipsumSentence))
                 .then(() => endLoadingState());
-        } else if(paragraphButton.classList.contains('button_active')) {
+        } else if (paragraphButton.classList.contains('button_active')) {
             //generate paragraphs 
             generateIpsumParagraphs(IpsumAmountControlValue)
-                .then((ipsumParagraphs) => writeIpsumToDOM(ipsumParagraphs))
                 .then(() => endLoadingState());
-        }       
+        }
     }
 }
 
@@ -323,32 +360,39 @@ const resetApp = () => {
     IpsumForm.classList.remove('display-none');
 };
 
+// const styleTagsInIpsumContainer = () => {
+//     const htmlTags = generatedIpsumContainer.textContent.match('<(.*)>.*?|<(.*) />');
+//     console.log(htmlTags);
+// };
+
+
+
 
 const copyIpsumToClipboard = () => {
-  
-//   generatedIpsumContainer.textContent.select();
-//   generatedIpsumContainer.textContent.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(generatedIpsumContainer.textContent);
-  tooltipText.textContent = 'Copied!'
-//   tooltip.classList.add('tooltip-clicked')
-  tooltipText.classList.add('tooltip-clicked')
-  copyButtonAudio.play();
-  setTimeout(() => {
-    tooltipText.textContent = "Copy to Clipboard";
-    // tooltip.classList.remove('tooltip-clicked')
-    tooltipText.classList.remove('tooltip-clicked')
-  }, 900);
+
+    //   generatedIpsumContainer.textContent.select();
+    //   generatedIpsumContainer.textContent.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(generatedIpsumContainer.textContent);
+    tooltipText.textContent = 'Copied!'
+    //   tooltip.classList.add('tooltip-clicked')
+    tooltipText.classList.add('tooltip-clicked')
+    copyButtonAudio.play();
+    setTimeout(() => {
+        tooltipText.textContent = "Copy to Clipboard";
+        // tooltip.classList.remove('tooltip-clicked')
+        tooltipText.classList.remove('tooltip-clicked')
+    }, 900);
 };
 
-// const getTag = (tagButtons) => {
-//     const activeButton = tagButtons.filter(button => button.classList.contains('active'));
-//     const tagString = activeButton.textContent;
-//     return tagString;
-// }
+
+//https://stackoverflow.com/questions/49247129/javascript-copy-p-tag-with-html-format-to-clipbord/49247263
+//https://stackoverflow.com/questions/42816349/copy-button-preserving-line-breaks/42817223
+
+
 
 IpsumForm.addEventListener('submit', handleFormSubmit);
-lengthButtonsContainer.addEventListener('click', (e) => changeButtonColor(e,lengthButtons));
-tagButtonsContainer.addEventListener('click', (e) => changeButtonColor(e,tagButtons));
+lengthButtonsContainer.addEventListener('click', (e) => changeButtonColor(e, lengthButtons));
+tagButtonsContainer.addEventListener('click', (e) => changeButtonColor(e, tagButtons));
 backButton.addEventListener('click', resetApp);
 copyIpsumButton.addEventListener('click', copyIpsumToClipboard);
 

@@ -52,8 +52,12 @@
                             <span class="tooltiptext" id="tooltiptext">Copy to clipboard</span>
                         </div>
                     </div>
-                    <div class="generated-ipsum-container display-none" id="generated-ipsum-container">
-                    </div>
+                    <textarea 
+                        class="generated-ipsum-container display-none" 
+                        id="generated-ipsum-container" 
+                        spellcheck="false"
+                        readonly>
+                    </textarea>
                     <div id="loading-copy" class="loading-copy display-none">
                         <div>
                             <div id='loader'></div>
@@ -70,6 +74,7 @@
         <p>&copy; Jack Manzer 2021</p>
          <p>view source code on my github</p>
     </footer>  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <audio src="./assets/audio/pop.wav" id="form-button-audio"></audio>
     <audio src="./assets/audio/tap-warm.wav" id="back-button-audio"></audio>
     <audio src="./assets/audio/slide-scissors.wav" id="copy-button-audio"></audio>
