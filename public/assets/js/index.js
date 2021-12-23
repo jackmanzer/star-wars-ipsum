@@ -316,13 +316,13 @@ const addTagToIpsumString = (ipsumString) => {
 
 const handleFormSubmit = (e) => {
     e.preventDefault();
-    //play form submission sound
-    formSubmitAudio.play();
     //validate IpsumAmountControl Input 
     if (/\D/.test(IpsumAmountControl.value)) {
         alert('please enter a number');
         IpsumAmountControl.value = '';
     } else {
+         //play form submission sound
+        formSubmitAudio.play();
         //store input value 
         const IpsumAmountControlValue = Number(IpsumAmountControl.value);
         //initiate loading state 
@@ -332,11 +332,11 @@ const handleFormSubmit = (e) => {
             //generate sentence 
             generateIpsumSentence(IpsumAmountControlValue)
                 .then((ipsumSentence) => writeIpsumToDOM(ipsumSentence))
-                .then(() => endLoadingState());
+                .then(() => setTimeout(endLoadingState, 3000));
         } else if (paragraphButton.classList.contains('button_active')) {
             //generate paragraphs 
             generateIpsumParagraphs(IpsumAmountControlValue)
-                .then(() => endLoadingState());
+                .then(() => setTimeout(endLoadingState, 3000));
         }
     }
 }

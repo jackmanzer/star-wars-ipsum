@@ -21,11 +21,11 @@
         <main class="main">
             <div class="wrapper">
                 <div class="intro-material">
-                    <h2>Give Your Placeholder Text Some Galatic Flavor</h2>
-                    <p>Ahh. Back to the future. George, there's nothing to be scared of. All it takes is a little self
-                        confidence. You know, if you put your mind to it, you could accomplish anything. He's your
-                        brother,
-                        Mom. Don't tell me.</p>
+                    <h2>You Love Starwars. So Why Compromise?</h2>
+                    <p>You already have the t-shirts, several vintage action figures, and an authentic $10,000 wookie mask you bought against your better judgement.
+                       Are you really going to use boring old Lorem Ipsum? Give your project the touch of Starwars nostalgia 
+                       it deserves. 
+                    </p>
                     <!-- <hr class="intro-horizontal-rule"> -->
                 </div>
                 <form class="ipsum-form" id="ipsum-form" autocomplete="off">
@@ -34,7 +34,7 @@
                         <button class="paragraphs-button button_inactive" id="paragraphs-button">paragraphs</button>
                     </div>
                     <input class="ipsum-amount-control" type="text" placeholder="How many?" id="ipsum-amount-control"
-                        autocomplete="off">
+                        autocomplete="off" required>
                     <div class="tag-buttons-container" id="tag-buttons-container">
                         <button id="p-tag-button" class="button_inactive">&lt;p&gt;</button>
                         <button id="li-tag-button" class="button_inactive">&lt;li&gt;</button>
@@ -71,8 +71,7 @@
         </main>
     </div>
     <footer class="footer">
-        <p>&copy; Jack Manzer 2021</p>
-         <p>view source code on my github</p>
+         <a class="github-link" href="https://github.com/jackmanzer/starwars-ipsum" target="_blank">View on Github</a>
     </footer>  
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <audio src="./assets/audio/pop.wav" id="form-button-audio"></audio>
