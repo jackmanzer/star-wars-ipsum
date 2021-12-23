@@ -34,16 +34,6 @@ app.get("/", (req, res) => {
 });
 
 
-// app.get("/vehicles", (req, res) => {
-//   db.vehicles.find({}, (error, data) => {
-//     if (error) {
-//       res.send(error);
-//     } else {
-//       res.json(data);
-//     }
-//   });
-// });
-
 app.get("/characters", (req, res) => {
   Character.find({}, (error, data) => {
     if (error) {
