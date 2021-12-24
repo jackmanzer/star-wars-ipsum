@@ -29,7 +29,7 @@ const Species = require("./models/species");
 const Weapon = require("./models/weapon");
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "./public/index.html"));
+  res.sendFile('index.html', { root: 'public' })
 });
 
 
