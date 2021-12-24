@@ -41,26 +41,26 @@ const spanTagButton = $('#span-tag-button');
 const noTagButton = $('#no-tag-button');
 
 //1.3 ipsum form
-const IpsumForm = document.querySelector('#ipsum-form');
-const IpsumAmountControl = document.querySelector('#ipsum-amount-control');
+const IpsumForm = $('#ipsum-form');
+const IpsumAmountControl = $('#ipsum-amount-control');
 
 //1.4 load state 
-const loadingCopy = document.querySelector('#loading-copy');
+const loadingCopy = $('#loading-copy');
 
 //1.5 generate ipsum section 
-const generatedIpsumSection = document.querySelector('#generated-ipsum-section');
-const generatedIpsumButtonContainer = document.querySelector('#generated-ipsum-button-container');
-const generatedIpsumContainer = document.querySelector('#generated-ipsum-container');
-const backButton = document.querySelector('#back-button');
-const copyIpsumButton = document.querySelector('#copy-ipsum-button');
-const tooltip = document.querySelector('#tooltip');
-const tooltipText = document.querySelector('#tooltiptext');
+const generatedIpsumSection = $('#generated-ipsum-section');
+const generatedIpsumButtonContainer = $('#generated-ipsum-button-container');
+const generatedIpsumContainer = $('#generated-ipsum-container');
+const backButton = $('#back-button');
+const copyIpsumButton = $('#copy-ipsum-button');
+const tooltip = $('#tooltip');
+const tooltipText = $('#tooltiptext');
 
 //1.6 audio clips
-const formButtonAudio = document.querySelector('#form-button-audio');
-const formSubmitAudio = document.querySelector('#form-submit-audio');
-const copyButtonAudio = document.querySelector('#copy-button-audio');
-const backButtonAudio = document.querySelector('#back-button-audio');
+const formButtonAudio = $('#form-button-audio');
+const formSubmitAudio = $('#form-submit-audio');
+const copyButtonAudio = $('#copy-button-audio');
+const backButtonAudio = $('#back-button-audio');
 
 
 //2. change button class 
@@ -69,10 +69,12 @@ function changeButtonClass(e, buttons) {
     e.preventDefault();                             
     buttons.removeClass('button_active');
     buttons.addClass('button_inactive');
-    $(e.target).addClass('button_active');
-    formButtonAudio[0].play();
-}
 
+    if($(e.target).prop('tagName') === 'BUTTON'){
+        $(e.target).addClass('button_active');
+        formButtonAudio[0].play();
+    }
+}
 
 //3. fetch data 
 async function createDataObject() {
@@ -191,8 +193,8 @@ function capitalizeAString(word) {
 }
 
 function addTagToIpsumString(ipsumString) {
-    const activeButton = tagButtonsContainer.querySelector('.button_active').textContent;
-    console.log(activeButton);
+    const activeButton = tagButtonsContainer.find('.button_active').text();
+
     if(activeButton === '<p>'){
         ipsumString = `<p>${ipsumString}</p>`
     } else if(activeButton === '<li>'){
@@ -213,7 +215,7 @@ async function generateIpsumSentence(numberOfWords) {
     const ipsumString = await generateIpsumString(numberOfWords);
     const ipsumSentence = convertIpsumStringtoSentence(ipsumString);
     const ipsumSentenceWithTags = addTagToIpsumString(ipsumSentence);
-    generatedIpsumContainer.textContent = ipsumSentenceWithTags;
+    generatedIpsumContainer.text(ipsumSentenceWithTags);
 };
 
 //5.3 generate different paragraph sizes 
@@ -313,43 +315,43 @@ async function generateIpsumParagraphs(numberOfParagraphs) {
         const paragraphWithTags = addTagToIpsumString(generatedParagraph);
         generatedIpsum += paragraphWithTags.concat('\r\n\r\n');
     };
-    generatedIpsumContainer.textContent = generatedIpsum.trim();
+    generatedIpsumContainer.text(generatedIpsum.trim());
 };
 
 //6. load states 
 
 function intiateLoadingState() {
-    IpsumForm.classList.add('display-none');
-    generatedIpsumSection.classList.remove('display-none');
-    loadingCopy.classList.remove('display-none');
+    IpsumForm.addClass('display-none');
+    generatedIpsumSection.removeClass('display-none');
+    loadingCopy.removeClass('display-none');
 }
 
 function endLoadingState() {
-    loadingCopy.classList.add('display-none');
-    generatedIpsumButtonContainer.classList.remove('display-none');
-    generatedIpsumContainer.classList.remove('display-none');
+    loadingCopy.addClass('display-none');
+    generatedIpsumButtonContainer.removeClass('display-none');
+    generatedIpsumContainer.removeClass('display-none');
 }
 
 //7. generate ipsum section functions 
 
 function resetApp() {
-    backButtonAudio.play();
-    generatedIpsumButtonContainer.classList.add('display-none');
-    generatedIpsumContainer.classList.add('display-none');
-    IpsumForm.classList.remove('display-none');
+    backButtonAudio[0].play();
+    generatedIpsumButtonContainer.addClass('display-none');
+    generatedIpsumContainer.addClass('display-none');
+    IpsumForm.removeClass('display-none');
 };
 
 
 function copyIpsumToClipboard() {
-    navigator.clipboard.writeText(generatedIpsumContainer.textContent);
-    tooltipText.textContent = 'Copied!'
+    navigator.clipboard.writeText(generatedIpsumContainer.text());
+    tooltipText.text('Copied!')
     //   tooltip.classList.add('tooltip-clicked')
-    tooltipText.classList.add('tooltip-clicked')
-    copyButtonAudio.play();
+    tooltipText.addClass('tooltip-clicked')
+    copyButtonAudio[0].play();
     setTimeout(() => {
-        tooltipText.textContent = "Copy to Clipboard";
+        tooltipText.text("Copy to Clipboard");
         // tooltip.classList.remove('tooltip-clicked')
-        tooltipText.classList.remove('tooltip-clicked')
+        tooltipText.removeClass('tooltip-clicked')
     }, 900);
 };
 
@@ -360,22 +362,22 @@ function copyIpsumToClipboard() {
 function handleFormSubmit(e) {
     e.preventDefault();
     //validate IpsumAmountControl Input 
-    if (/\D/.test(IpsumAmountControl.value)) {
+    if (/\D/.test(IpsumAmountControl.val())) {
         alert('please enter a number');
-        IpsumAmountControl.value = '';
+        IpsumAmountControl.val() = '';
     } else {
          //play form submission sound
-        formSubmitAudio.play();
+        formSubmitAudio[0].play();
         //store input value 
-        const IpsumAmountControlValue = Number(IpsumAmountControl.value);
+        const IpsumAmountControlValue = Number(IpsumAmountControl.val());
         //initiate loading state 
         intiateLoadingState();
         //check length button selection 
-        if (wordsButton.classList.contains('button_active')) {
+        if (wordsButton.hasClass('button_active')) {
             //generate sentence 
             generateIpsumSentence(IpsumAmountControlValue)
                 .then(() => setTimeout(endLoadingState, 3000));
-        } else if (paragraphButton.classList.contains('button_active')) {
+        } else if (paragraphButton.hasClass('button_active')) {
             //generate paragraphs 
             generateIpsumParagraphs(IpsumAmountControlValue)
                 .then(() => setTimeout(endLoadingState, 3000));
@@ -386,3 +388,6 @@ function handleFormSubmit(e) {
 //9. event listeners 
 lengthButtonsContainer.click((e) => changeButtonClass(e, lengthButtons));
 tagButtonsContainer.click((e) => changeButtonClass(e, tagButtons));
+IpsumForm.submit(handleFormSubmit);
+backButton.click(resetApp);
+copyIpsumButton.click(copyIpsumToClipboard);
