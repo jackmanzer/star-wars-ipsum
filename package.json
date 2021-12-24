@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/jackmanzer/starwars-ipsum#readme",
   "dependencies": {
+    "autosize": "^5.0.1",
     "express": "^4.17.1",
     "mongoose": "^6.1.1"
   }

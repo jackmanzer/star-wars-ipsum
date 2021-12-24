@@ -2,7 +2,6 @@
 /* table of contents
 
 1. global styles
-    1.1 utility classes 
     1.2 media queries
 
 2. header 
@@ -20,6 +19,8 @@
     5.2 tooltip
 
 6. footer 
+
+7. utility classes
 
 */
 
@@ -68,16 +69,6 @@ body {
 @font-face {
     font-family: 'Starjedi';
     src: url('../fonts/Starjedi.ttf');
-}
-
-/* 1.1 utility classes*/
-
-.display-none {
-    display: none;
-}
-
-.display-block {
-    display: block;
 }
 
 /* 1.2 media queries */
@@ -752,7 +743,17 @@ body {
     color: white;
 }
 
+/*  ==================
+    7 utility classes  
+    ================== */
 
+.display-none {
+    display: none;
+}
+
+.display-block {
+    display: block;
+}
   
   
 

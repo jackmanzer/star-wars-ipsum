@@ -22,6 +22,14 @@
     5.3 generate different paragraph sizes 
     5.4 generate ipsum paragraphs 
 
+6. load states
+
+7. generate ipsum section functions 
+
+8. handle form submission 
+
+9. event listeners 
+
 */
 
 //1. dom queries 
@@ -281,6 +289,7 @@ async function createLongParagraph(data) {
     stringArray.splice(90, 0, '.');
     stringArray[91] = capitalizeAString(stringArray[91]);
     stringArray.push('.');
+     //add spaces 
     for (element in stringArray) {
         if (stringArray[element] == '.' || stringArray[element] == ',') {
             longParagraph += stringArray[element];
@@ -327,6 +336,7 @@ function intiateLoadingState() {
 }
 
 function endLoadingState() {
+    console.log('end loading state ran');
     loadingCopy.addClass('display-none');
     generatedIpsumButtonContainer.removeClass('display-none');
     generatedIpsumContainer.removeClass('display-none');
@@ -354,8 +364,6 @@ function copyIpsumToClipboard() {
         tooltipText.removeClass('tooltip-clicked')
     }, 900);
 };
-
-
 
 //8. handle form submission 
 
