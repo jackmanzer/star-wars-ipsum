@@ -26,7 +26,6 @@ mongoose.connection.on('connected', () => {
 const Character = require("./models/character");
 const Planet = require("./models/planet");
 const Species = require("./models/species");
-const Vehicle = require("./models/vehicle");
 const Weapon = require("./models/weapon");
 
 app.get("/", (req, res) => {
