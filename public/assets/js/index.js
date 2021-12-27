@@ -220,10 +220,12 @@ function addTagToIpsumString(ipsumString) {
 //5.2 generate ipsum sentence 
 
 async function generateIpsumSentence(numberOfWords) {
+
     const ipsumString = await generateIpsumString(numberOfWords);
     const ipsumSentence = convertIpsumStringtoSentence(ipsumString);
     const ipsumSentenceWithTags = addTagToIpsumString(ipsumSentence);
     generatedIpsumContainer.text(ipsumSentenceWithTags);
+    return;
 };
 
 //5.3 generate different paragraph sizes 
@@ -325,6 +327,7 @@ async function generateIpsumParagraphs(numberOfParagraphs) {
         generatedIpsum += paragraphWithTags.concat('\r\n\r\n');
     };
     generatedIpsumContainer.text(generatedIpsum.trim());
+    return;
 };
 
 //6. load states 
@@ -336,10 +339,10 @@ function intiateLoadingState() {
 }
 
 function endLoadingState() {
-    console.log('end loading state ran');
     loadingCopy.addClass('display-none');
     generatedIpsumButtonContainer.removeClass('display-none');
     generatedIpsumContainer.removeClass('display-none');
+    expandTextAreaHeight();
 }
 
 //7. generate ipsum section functions 
@@ -351,6 +354,11 @@ function resetApp() {
     IpsumForm.removeClass('display-none');
 };
 
+function expandTextAreaHeight() {
+    generatedIpsumContainer.css('height', 'inherit');
+    const height = generatedIpsumContainer[0].scrollHeight;
+    generatedIpsumContainer.css('height', height + 'px');
+}
 
 function copyIpsumToClipboard() {
     navigator.clipboard.writeText(generatedIpsumContainer.text());

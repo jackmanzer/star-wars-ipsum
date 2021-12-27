@@ -286,7 +286,8 @@ body {
     margin-top: .875rem;
     padding: 1.5rem;
     padding-top: 1.5rem;
-    height: 20rem;
+    min-height: 5rem;
+    max-height: 80rem;
     border-radius: .25rem;
     line-height: 1.25rem;
     background-color:#091722;
