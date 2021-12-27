@@ -83,7 +83,7 @@ app.get("/weapons", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("App running on port 3000!");
 });
 
