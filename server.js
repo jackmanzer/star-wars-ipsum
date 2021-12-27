@@ -23,12 +23,13 @@ mongoose.connection.on('connected', () => {
 });
 
 //import models 
-const { Character, Planet, Species, Weapon, Vehicle} = require('models');
-// const Character = require("./models/character");
-// const Planet = require("./models/planet");
-// const Species = require("./models/species");
-// const Weapon = require("./models/weapon");
-// const Vehicle = require("./models/vehicle");
+//const { Character, Planet, Species, Weapon, Vehicle } = require('./models');
+const Character = require("./models/character");
+const Vehicle = require("./models/vehicle");
+const Planet = require("./models/planet");
+const Species = require("./models/species");
+const Weapon = require("./models/weapon");
+
 
 app.get("/", (req, res) => {
   res.sendFile('index.html', { root: 'public' })
