@@ -363,7 +363,7 @@ function expandTextAreaHeight() {
 function copyIpsumToClipboard() {
     generatedIpsumContainer[0].select();
     generatedIpsumContainer[0].setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(generatedIpsumContainer[0].value);
+    document.execCommand("Copy");
     tooltipText.text('Copied!')
     tooltipText.addClass('tooltip-clicked')
     copyButtonAudio[0].play();
