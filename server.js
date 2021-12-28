@@ -22,8 +22,6 @@ mongoose.connection.on('connected', () => {
   console.log('Mongoose is connected!!!!');
 });
 
-//import models 
-//const { Character, Planet, Species, Weapon, Vehicle } = require('./models');
 const Character = require("./models/character");
 const Vehicle = require("./models/vehicle");
 const Planet = require("./models/planet");

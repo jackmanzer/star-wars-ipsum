@@ -52,6 +52,7 @@ body {
     background-image: url('../img/page-background.jpg');
     background-size: 100%;
     height: 100%;
+    font-size: 1rem;
 }
 
 
@@ -184,6 +185,7 @@ body {
     padding: .75rem;
     border-radius: .25rem;
     font-family: 'roboto';
+    font-size: 1rem;
 }
 
 .ipsum-amount-control:focus {
@@ -206,6 +208,7 @@ body {
     font-weight: 500;
     border-radius: .2rem;
     font-family: 'roboto';
+    font-size: 1rem;
 }
 
 .ipsum-form-submit-button:hover {
@@ -226,6 +229,7 @@ body {
     width: 18rem;
     border: 1px solid white;
     padding: .5rem 1rem .5rem 1rem;
+    font-size: 1rem;
 }
 
 .words-button {
@@ -282,6 +286,7 @@ body {
     width: 100%;
     color: white;
     resize: none;
+    font-size: 1rem;
     font-family: 'roboto', sans-serif;
     margin-top: .875rem;
     padding: 1.5rem;
@@ -308,6 +313,7 @@ body {
     color: white;
     border: none;
     border: 1px solid white;
+    font-size: 1rem;
 }
 
 .copy-ipsum-button:hover, .back-button:hover {
