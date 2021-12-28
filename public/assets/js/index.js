@@ -407,3 +407,4 @@ tagButtonsContainer.click((e) => changeButtonClass(e, tagButtons));
 IpsumForm.submit(handleFormSubmit);
 backButton.click(resetApp);
 copyIpsumButton.click(copyIpsumToClipboard);
+
