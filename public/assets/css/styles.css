@@ -13,6 +13,7 @@
    4.2 length buttons 
    4.3 tag buttons 
    4.4 ipsum form change button color classes
+   4.5 media queries 
 
 5. generate ipsum section 
     5.1 loading state 
@@ -69,9 +70,6 @@ body {
     background-color: #6b7280;
 }
 
-
-
-
 .sticky-footer-wrapper {
     min-height: 100%;
 }
@@ -93,7 +91,7 @@ body {
       background-size: 50%;
       background-position-x: center;
     }
-  }
+}
 
 /*  ================
     2. header 
@@ -290,6 +288,19 @@ body {
 .button_active {
     background-color: white;
     color: black;
+}
+
+/* 4.5 media queries */
+@media screen and (min-width: 450px) {
+    .ipsum-amount-control {
+        font-size: .875rem;
+    }
+    .length-buttons-container button {
+        font-size: .875rem;
+    }
+    .tag-buttons-container button {
+        font-size: .875rem;
+    }
 }
 
 /*  ========================
