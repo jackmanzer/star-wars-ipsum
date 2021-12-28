@@ -65,7 +65,6 @@ const tooltip = $('#tooltip');
 const tooltipText = $('#tooltiptext');
 
 //1.6 audio clips
-const formButtonAudio = $('#form-button-audio');
 const formSubmitAudio = $('#form-submit-audio');
 const copyButtonAudio = $('#copy-button-audio');
 const backButtonAudio = $('#back-button-audio');
@@ -80,7 +79,6 @@ function changeButtonClass(e, buttons) {
 
     if($(e.target).prop('tagName') === 'BUTTON'){
         $(e.target).addClass('button_active');
-        formButtonAudio[0].play();
     }
 }
 
