@@ -360,8 +360,11 @@ body {
 .loading-copy_quote {
     font-style: italic;
     margin-top: 2rem;
+    text-align: center;
+    line-height: 150%;
 }
 .loading-copy_quote_source {
+    margin-top: .75rem;
     font-size: .875rem;
 }
 
