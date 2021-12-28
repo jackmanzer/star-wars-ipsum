@@ -361,14 +361,14 @@ function expandTextAreaHeight() {
 }
 
 function copyIpsumToClipboard() {
-    navigator.clipboard.writeText(generatedIpsumContainer.text());
+    generatedIpsumContainer[0].select();
+    generatedIpsumContainer[0].setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(generatedIpsumContainer[0].value);
     tooltipText.text('Copied!')
-    //   tooltip.classList.add('tooltip-clicked')
     tooltipText.addClass('tooltip-clicked')
     copyButtonAudio[0].play();
     setTimeout(() => {
         tooltipText.text("Copy to Clipboard");
-        // tooltip.classList.remove('tooltip-clicked')
         tooltipText.removeClass('tooltip-clicked')
     }, 900);
 };
