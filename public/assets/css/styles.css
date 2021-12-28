@@ -150,6 +150,7 @@ body {
     font-size: 1.75rem;
     font-weight: 700;
     margin-left: 1rem;
+    margin-right: 1rem;
     width: calc(100% - 2rem);
     line-height: 125%;
     max-width: 40rem;
@@ -159,6 +160,7 @@ body {
 .intro-material p {
     margin-top: 1rem;
     margin-left: 1rem;
+    margin-right: 1rem;
     width: calc(100% - 2rem);
     line-height: 135%;
     color: #3588CB;
@@ -211,6 +213,7 @@ body {
 
 .ipsum-amount-control::placeholder {
     color: white;
+    opacity: 100%;
 }
 
 .ipsum-form-submit-button {
@@ -235,6 +238,7 @@ body {
 
 .length-buttons-container {
     margin-bottom: 1.5rem;
+    height: 2.25rem;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -243,7 +247,7 @@ body {
 .length-buttons-container button {
     width: 18rem;
     border: 1px solid white;
-    padding: .5rem 1rem .5rem 1rem;
+    padding: .4rem 1rem .5rem 1rem;
     font-size: 1rem;
 }
 
@@ -258,19 +262,21 @@ body {
 /* 4.3 tag buttons */
 
 .tag-buttons-container {
-    margin-top: 1.5rem;
+    margin-top: .75rem;
     margin-bottom: 1.5rem;
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .tag-buttons-container button {
     border: 1px solid white;
-    width: 4rem;
+    width: 6rem;
     margin-right: .75rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    margin-top: .875rem;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
     border-radius: .2rem;
     font-size: 1rem;
 }
