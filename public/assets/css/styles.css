@@ -238,7 +238,6 @@ body {
 
 .length-buttons-container {
     margin-bottom: 1.5rem;
-    height: 2.25rem;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -247,7 +246,7 @@ body {
 .length-buttons-container button {
     width: 18rem;
     border: 1px solid white;
-    padding: .4rem 1rem .5rem 1rem;
+    padding: .5rem 1rem .7rem 1rem;
     font-size: 1rem;
 }
 
