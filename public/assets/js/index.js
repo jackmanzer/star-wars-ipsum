@@ -150,31 +150,31 @@ async function generateIpsumString(numberOfWords) {
 //4.1 generateRandomFunctions 
 
 function generateRandomCharacter(data) {
-    let randomNumber = Math.floor(Math.random() * 10);
+    let randomNumber = Math.floor(Math.random() * data.characters.length);
     let randomChararacter = data.characters[randomNumber];
     return randomChararacter;
 };
 
 function generateRandomPlanet(data) {
-    let randomNumber = Math.floor(Math.random() * 10);
+    let randomNumber = Math.floor(Math.random() * data.planets.length);
     let randomPlanet = data.planets[randomNumber];
     return randomPlanet;
 };
 
 function generateRandomSpecies(data) {
-    let randomNumber = Math.floor(Math.random() * 10);
+    let randomNumber = Math.floor(Math.random() * data.species.length);
     let randomSpecies = data.species[randomNumber];
     return randomSpecies;
 };
 
 function generateRandomVehicle(data) {
-    let randomNumber = Math.floor(Math.random() * 10);
+    let randomNumber = Math.floor(Math.random() * data.vehicles.length);
     let randomVehicle = data.vehicles[randomNumber];
     return randomVehicle;
 };
 
 function generateRandomWeapon(data) {
-    let randomNumber = Math.floor(Math.random() * 10);
+    let randomNumber = Math.floor(Math.random() * data.weapons.length);
     let randomWeapon = data.weapons[randomNumber];
     return randomWeapon;
 };
