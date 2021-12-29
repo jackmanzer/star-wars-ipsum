@@ -99,6 +99,7 @@ async function createDataObject() {
             vehicles: vehiclesData.map((result) => result.name),
             weapons: weaponsData.map((result) => result.name),
         }
+        console.log(data);
         return data;
     }
     catch (err) {
